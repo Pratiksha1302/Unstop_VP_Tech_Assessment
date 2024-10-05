@@ -1,0 +1,35 @@
+<div class="reservation-container">
+  <h1>Seat Booking for Train Coach</h1>
+
+  <input
+    type="number"
+    [(ngModel)]="seatsRequired"
+    min="1"
+    max="7"
+    placeholder="Enter number of seats"
+  />
+  <button (click)="allocateSeats()">Book Now</button>
+
+  <h2>Current Coach Layout</h2>
+  <div class="coach-seating">
+    <div
+      *ngFor="let row of seatingArrangement; let rowIndex = index"
+      class="seat-row"
+    >
+      <span
+        *ngFor="let seat of row; let seatIndex = index"
+        [ngClass]="{ reserved: seat === 'R', free: seat === 'A' }"
+        class="seat-item"
+      >
+        {{ rowIndex + 1 }}-{{ seatIndex + 1 }}
+      </span>
+    </div>
+  </div>
+
+  <div *ngIf="recentlyBookedSeats.length">
+    <h3>Your Booked Seats:</h3>
+    <ul>
+      <li *ngFor="let seat of recentlyBookedSeats">{{ seat }}</li>
+    </ul>
+  </div>
+</div>
